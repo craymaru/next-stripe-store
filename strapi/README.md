@@ -1,3 +1,16 @@
+# 🚀 Running project
+Local
+`docker-compose up -d strapiDB && yarn develop`
+This will now spin up just a Postgres database, and we can run and change files just like working on strapi anywhere.
+🫰PRO TIP- replace yarn develop with npm run develop if using npm
+
+Full
+`docker-compose up -d`
+This will run strapi inside a docker container and the database in its own container.
+
+
+---
+
 # 🚀 Getting started with Strapi
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html) (CLI) which lets you scaffold and manage your project in seconds.
