@@ -1,7 +1,9 @@
-import { gql, useQuery } from "@apollo/client"
+import { gql } from "@apollo/client"
 import { NextPage } from "next"
 
 import { Col, Container, Grid, Group, Space } from "@mantine/core"
+
+import { useAssetsQuery } from "../generated/graphql"
 
 import AssetCard from "@/components/AssetCard"
 import { HeaderAction } from "@/components/HeaderActions"
@@ -31,7 +33,7 @@ const GET_RESTAURANT = gql`
 `
 
 const Index: NextPage = () => {
-  const { loading, error, data } = useQuery(GET_RESTAURANT)
+  const { loading, error, data } = useAssetsQuery()
 
   console.log(data)
 
@@ -77,15 +79,15 @@ const Index: NextPage = () => {
         <Space h="lg" />
         <Container size="lg" mt="md">
           <Grid>
-            {data.restaurants.data.map((restaurant: any) => {
-              const { name, description, image, id } = restaurant.attributes || {}
+            {data?.assets?.data.map(({ id, attributes }) => {
+              const { name, author, image } = attributes || {}
 
-              const _url = image.data[0].attributes.url
-              const imageUrl = _url ? API_ENDPOINT + _url : ""
+              const _imageUrl = image?.data?.attributes?.url
+              const imageUrl = _imageUrl ? API_ENDPOINT + _imageUrl : ""
 
               return (
                 <Col key={id} xs={12} sm={6} md={4} xl={4}>
-                  <AssetCard imageUrl={imageUrl} author={description} status="New" title={name} key={id} />
+                  <AssetCard name={name} author={author} imageUrl={imageUrl} status="New" key={id} />
                 </Col>
               )
             })}

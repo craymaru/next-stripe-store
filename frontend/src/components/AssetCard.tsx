@@ -3,13 +3,13 @@ import { FC } from "react"
 import { Badge, Card, CardSection, Image, Text } from "@mantine/core"
 
 type Props = {
-  title: string
-  author: string
-  status: string
-  imageUrl: string
+  name?: string
+  author?: string | null
+  status?: string
+  imageUrl?: string
 }
 
-const AssetCard: FC<Props> = ({ title, status, author, imageUrl }) => {
+const AssetCard: FC<Props> = ({ name = "", author = "", status, imageUrl }) => {
   return (
     <Card shadow="lg" radius={10} p={0}>
       <CardSection>
@@ -19,7 +19,7 @@ const AssetCard: FC<Props> = ({ title, status, author, imageUrl }) => {
       <div className="flex items-center p-4">
         <div className="overflow-hidden">
           <div className="flex items-center">
-            <Text className="truncate text-xs text-white">{`${title} ${title} ${title}`}</Text>
+            <Text className="truncate text-xs text-white">{`${name} ${name} ${name}`}</Text>
             <Badge color="indigo" radius="lg" variant="filled" ml="xs" style={{ overflow: "visible" }}>
               {status}
             </Badge>
