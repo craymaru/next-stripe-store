@@ -1,0 +1,22 @@
+query Assets {
+  assets {
+    data {
+      id
+      attributes {
+        name
+        author
+        image {
+          data {
+            id
+            attributes {
+              url
+            }
+          }
+        }
+        createdAt
+        updatedAt
+        publishedAt
+      }
+    }
+  }
+}
