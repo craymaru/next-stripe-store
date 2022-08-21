@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "assets",
+  "info": {
+    "singularName": "asset",
+    "pluralName": "assets",
+    "displayName": "Asset",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "author": {
+      "type": "string",
+      "maxLength": 10,
+      "minLength": 1
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": false
+    }
+  }
+}
