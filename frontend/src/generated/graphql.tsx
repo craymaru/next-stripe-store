@@ -1033,12 +1033,70 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
+export type AssetQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type AssetQuery = { __typename?: 'Query', asset?: { __typename?: 'AssetEntityResponse', data?: { __typename?: 'AssetEntity', id?: string | null, attributes?: { __typename?: 'Asset', name: string, author?: string | null, createdAt?: any | null, updatedAt?: any | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null } | null } | null };
+
 export type AssetsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AssetsQuery = { __typename?: 'Query', assets?: { __typename?: 'AssetEntityResponseCollection', data: Array<{ __typename?: 'AssetEntity', id?: string | null, attributes?: { __typename?: 'Asset', name: string, author?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
 
 
+export const AssetDocument = gql`
+    query Asset($id: ID!) {
+  asset(id: $id) {
+    data {
+      id
+      attributes {
+        name
+        author
+        image {
+          data {
+            id
+            attributes {
+              url
+            }
+          }
+        }
+        createdAt
+        updatedAt
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAssetQuery__
+ *
+ * To run a query within a React component, call `useAssetQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAssetQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAssetQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useAssetQuery(baseOptions: Apollo.QueryHookOptions<AssetQuery, AssetQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AssetQuery, AssetQueryVariables>(AssetDocument, options);
+      }
+export function useAssetLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AssetQuery, AssetQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AssetQuery, AssetQueryVariables>(AssetDocument, options);
+        }
+export type AssetQueryHookResult = ReturnType<typeof useAssetQuery>;
+export type AssetLazyQueryHookResult = ReturnType<typeof useAssetLazyQuery>;
+export type AssetQueryResult = Apollo.QueryResult<AssetQuery, AssetQueryVariables>;
 export const AssetsDocument = gql`
     query Assets {
   assets {

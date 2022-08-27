@@ -1,0 +1,21 @@
+query Asset($id: ID!) {
+  asset(id: $id) {
+    data {
+      id
+      attributes {
+        name
+        author
+        image {
+          data {
+            id
+            attributes {
+              url
+            }
+          }
+        }
+        createdAt
+        updatedAt
+      }
+    }
+  }
+}
