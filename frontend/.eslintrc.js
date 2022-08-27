@@ -4,24 +4,25 @@ module.exports = {
   plugins: ["@typescript-eslint", "@typescript-eslint", "import", "unused-imports"],
   extends: [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
     "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
+    "plugin:import/typescript",
     "plugin:import/warnings",
     "prettier",
   ],
   rules: {
-    "prefer-const": "warn",
-    "no-use-before-define": "warn",
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "no-use-before-define": "warn",
+    "prefer-const": "warn",
     "import/order": [
       "warn",
       {
-        groups: ["builtin", "external", "parent", "sibling", "index", "object", "type"],
-        alphabetize: { order: "asc" },
         "newlines-between": "always",
+        alphabetize: { order: "asc" },
+        groups: ["builtin", "external", "parent", "sibling", "index", "object", "type"],
         pathGroupsExcludedImportTypes: ["builtin", "object"],
         pathGroups: [
           // Main
@@ -32,9 +33,14 @@ module.exports = {
         ],
       },
     ],
-    // インポート構文の最後は必ず空行がある
-    "import/newline-after-import": "warn",
-    // 未使用インポートの警告
-    "unused-imports/no-unused-imports": "warn",
+    "import/newline-after-import": "warn", // インポートの末尾に空行
+    "unused-imports/no-unused-imports": "warn", // 未使用のインポート
+  },
+  settings: {
+    "import/resolver": {
+      typescript: {
+        project: "./tsconfig.json",
+      },
+    },
   },
 }
