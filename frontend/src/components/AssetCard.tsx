@@ -1,19 +1,23 @@
 import { FC } from "react"
 
 import { Badge, Card, CardSection, Image, Text } from "@mantine/core"
+import { NextLink } from "@mantine/next"
 
 type Props = {
+  id: string
   name?: string
   author?: string | null
   status?: string
   imageUrl?: string
 }
 
-const AssetCard: FC<Props> = ({ name = "", author = "", status, imageUrl }) => {
+const AssetCard: FC<Props> = ({ id, name = "", author = "", status, imageUrl }) => {
   return (
     <Card shadow="lg" radius={10} p={0}>
       <CardSection>
-        <Image src={imageUrl} height={240} alt="With defualt placeholder" withPlaceholder />
+        <NextLink href={`/assets/${id}`}>
+          <Image src={imageUrl} height={240} alt="With defualt placeholder" withPlaceholder />
+        </NextLink>
       </CardSection>
 
       <div className="flex items-center p-4">
